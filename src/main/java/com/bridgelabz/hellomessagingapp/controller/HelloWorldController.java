@@ -17,4 +17,11 @@ public class HelloWorldController {
     ){
         return "Hello " + key ;
     }
+
+    @GetMapping(value = "/hello3/{name}")
+    public String passingPathVariable(
+            @PathVariable(name = "name") String name
+    ){
+        return "Hello " + name;
+    }
 }
