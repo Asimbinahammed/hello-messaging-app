@@ -1,5 +1,6 @@
 package com.bridgelabz.hellomessagingapp.controller;
 
+import com.bridgelabz.hellomessagingapp.dto.NameDto;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,5 +24,10 @@ public class HelloWorldController {
             @PathVariable(name = "name") String name
     ){
         return "Hello " + name;
+    }
+
+    @PostMapping(value = "/hello4")
+    public String usingDTO(@RequestBody NameDto nameDTO ){
+       return nameDTO.toString();
     }
 }
