@@ -30,4 +30,12 @@ public class HelloWorldController {
     public String usingDTO(@RequestBody NameDto nameDTO ){
        return nameDTO.toString();
     }
+
+    @PutMapping(value = "hello5/{firstName}")
+    public String pathVariarableWithPassingParameter(
+            @PathVariable(name = "firstName") String firstName,
+            @RequestParam(name = "lastName") String lastName
+    ){
+        return "Hello, " + firstName + " " + lastName;
+    }
 }
