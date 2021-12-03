@@ -1,41 +1,43 @@
 package com.bridgelabz.hellomessagingapp.controller;
 
 import com.bridgelabz.hellomessagingapp.dto.NameDto;
-import org.springframework.ui.Model;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
+@RequestMapping
 @RestController
 public class HelloWorldController {
+    Logger logger = LoggerFactory.getLogger(HelloWorldController.class);
 
-    @GetMapping(value = "/hello1")
-    public String usingGetMethod(){
-        return "Hello from bridgelabz";
+    //http://localhost:8080/hello/home
+    @RequestMapping(value = {"", "/", "/home"})
+    public String sayHello() {
+        return "Hello From BridgeLabz!!!";
     }
 
-    @GetMapping(value = "/hello2")
-    public String passingParameter(
-           @RequestParam(name = "key") String key
-    ){
-        return "Hello " + key ;
+    //http://localhost:8080/hello/query?name=Asim
+    @RequestMapping(value = {"/query"}, method = RequestMethod.GET)
+    public String sayHello(@RequestParam(value = "name") String name) {
+        return "Hello " + name + "!";
     }
 
-    @GetMapping(value = "/hello3/{name}")
-    public String passingPathVariable(
-            @PathVariable(name = "name") String name
-    ){
-        return "Hello " + name;
+    //http://localhost:8080/hello/param/Asim
+    @GetMapping("/param/{name}")
+    public String sayHelloParam(@PathVariable String name) {
+        return "Hello " + name + "!";
     }
 
-    @PostMapping(value = "/hello4")
-    public String usingDTO(@RequestBody NameDto nameDTO ){
-       return nameDTO.toString();
+    //http://localhost:8080/hello/post
+    @PostMapping("/post")
+    public String sayHello(@RequestBody NameDto user) {
+        return "Hello " + user.getFirstName() + " " + user.getLastName() + "!";
     }
 
-    @PutMapping(value = "hello5/{firstName}")
-    public String pathVariarableWithPassingParameter(
-            @PathVariable(name = "firstName") String firstName,
-            @RequestParam(name = "lastName") String lastName
-    ){
-        return "Hello, " + firstName + " " + lastName;
+    //http://localhost:8080/hello/param
+    @PutMapping("/param/{firstName}")
+    public String sayHello(@PathVariable String firstName,
+                           @RequestParam(value = "lastName") String lastName) {
+        return "Hello " + firstName + " " + lastName + "!";
     }
 }

@@ -1,8 +1,15 @@
 package com.bridgelabz.hellomessagingapp.dto;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+@Component
 public class NameDto {
+    public static final Logger logger = LoggerFactory.getLogger(NameDto.class);
     private String firstName;
     private String lastName;
+
 
     public String getFirstName() {
         return firstName;
